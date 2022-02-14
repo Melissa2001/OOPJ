@@ -1,0 +1,166 @@
+/***************************************
+ * FILE        : Experiment 10
+ * DESCRIPTION : Banking System
+ * AUTHOR      : Melissa Manoj Thondoli
+ * VERSION     : 1
+ * DATE        : 27/01/22
+ **********************************/
+
+package OOPJ;
+import java.util.Scanner;
+
+class InvalidAmountException extends Exception{
+	InvalidAmountException(){
+		super();
+	}
+}
+class InsufficientFundsException extends Exception{
+	InsufficientFundsException(){
+		super();
+	}
+}
+class Bank{
+	String accName;
+	int accNumber;
+	String accBank;
+	int accBalance;
+	int accDeposit;
+	void displayDetails() {
+		System.out.println("Name = " + accName);
+		System.out.println("Bank = " + accBank);
+		System.out.println("Account number = " + accNumber);
+		System.out.println("Balance = " + accBalance);
+	}
+	void deposit(int amount) {
+		accBalance+=amount;
+	}
+	void withdraw(int amount) {
+		accBalance-=amount;
+	}
+}
+
+public class BankingSystem {
+	public static void main(String [] args) throws InvalidAmountException, InsufficientFundsException {
+		
+		System.out.println("Enter the number of customer:  ");
+		Scanner sc = new Scanner(System.in);
+		int noOfCustomers = sc.nextInt();
+		sc.nextLine();
+		
+		Bank [] customerArray = new Bank[noOfCustomers];
+		for(int i=0;i<noOfCustomers;i++) {
+			System.out.println("Enter the details of customer " + (i+1) +" :  ");
+			Bank bank = new Bank();
+			customerArray[i]=bank;
+			System.out.println("Name:  ");
+			customerArray[i].accName=sc.nextLine();
+			System.out.println("Bank name:  ");
+			customerArray[i].accBank=sc.nextLine();
+			System.out.println("Account Number:  ");
+			customerArray[i].accNumber=sc.nextInt();
+			System.out.println("Account Balance:  ");
+			customerArray[i].accBalance=sc.nextInt();
+			sc.nextLine();
+		}
+		
+		int option;
+		do {
+			System.out.println("Enter which option you want to perform:"
+					+ "\n1.Display account details "
+					+ "\n2.Search by account number"
+					+ " \n3.Deposit the amount "
+					+ "\n4.Withdraw the amount"
+					+ "\n5.Exit");
+			option= sc.nextInt();
+			
+			switch(option) {
+			case 1:
+				for(int i=0;i<noOfCustomers;i++) {
+					System.out.println("Customer "+ (i+1)); 
+					customerArray[i].displayDetails();
+					System.out.println();
+				}
+				break;
+				
+			case 2:
+				System.out.println("Enter the account number : ");
+				int number = sc.nextInt();
+				int found=0;
+				for(int i=0;i<noOfCustomers;i++) {
+					if(customerArray[i].accNumber==number) {
+						customerArray[i].displayDetails();
+						found++;
+					}
+				}
+				if(found==0) {
+					System.out.println("Try again! This account doesn't exit !");
+				}
+				System.out.println();
+				break;
+			
+			case 3:
+				System.out.println("Enter the account number : ");
+				number = sc.nextInt();
+				try {
+				System.out.println("Enter the amount to deposit: ");
+				int amount=sc.nextInt();
+				if(amount<=0) {
+					throw new InvalidAmountException();
+				}
+				found=0;
+				for(int i=0;i<noOfCustomers;i++) {
+					if(customerArray[i].accNumber==number) {
+						customerArray[i].deposit(amount);
+						System.out.println("Balance: " + customerArray[i].accBalance);
+						found++;
+					}
+				}
+				if(found==0) {
+					System.out.println("Try again! This account doesn't exit !");
+				}
+				System.out.println();
+				}catch(InvalidAmountException e) {
+					System.out.println(e + "  Not allowed to deposit amount <= 0");
+				}
+				break;
+				
+			case 4:
+				System.out.println("Enter the account number : ");
+				number = sc.nextInt();
+				try {
+				System.out.println("Enter the amount to withdraw: ");
+				int amount=sc.nextInt();
+				if(amount<=0) {
+					throw new InvalidAmountException();
+				}
+				found=0;
+				for(int i=0;i<noOfCustomers;i++) {
+					if(customerArray[i].accNumber==number) {
+						if(amount>customerArray[i].accBalance) {
+							throw new InsufficientFundsException();
+						}
+						customerArray[i].withdraw(amount);
+						System.out.println("Balance: " + customerArray[i].accBalance);
+						found++;
+					}
+				}
+				if(found==0) {
+					System.out.println("Try again! This account doesn't exit !");
+				}
+				System.out.println();
+				}catch(InvalidAmountException e) {
+					System.out.println(e + "  Not allowed to withdraw amount <= 0");
+				}catch(InsufficientFundsException e) {
+					System.out.println(e + "  Not allowed to withdraw an amount greater than the available amount");
+				}
+				break;
+				
+			case 5:
+				System.out.println("Thank You!!!");
+				break;
+			}
+		}while(option!=5);
+		
+		sc.close();
+	}
+}
