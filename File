@@ -1,0 +1,41 @@
+/***********************************************************************
+* File          : Experiment No. 9
+* Description   : File handling program in Java with reader/writer.
+* Author        : Melissa Manoj Thondoli
+* Version       : 1.0
+* Date          : 21/01/22
+***********************************************************************/
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.Scanner;
+import java.io.IOException;
+import java.io.*;
+public class File {
+    public static void main(String [] args) throws FileNotFoundException, IOException{
+
+        FileWriter fw = new FileWriter("sample.txt");
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the string:  ");
+        String input=sc.next();
+
+        char[] myContent = new char[input.length()];
+        input.getChars(0, input.length(), myContent, 0);
+        fw.write(myContent);
+
+        fw.close();
+        sc.close();
+
+        FileReader fr = new FileReader("sample.txt");
+        char [] content = new char[100];
+        fr.read(content);
+
+        FileWriter fww = new FileWriter("new-sample.txt");
+        fww.write(content);
+
+        fr.close();
+        fww.close();
+    }
+}
