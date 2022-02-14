@@ -1,0 +1,44 @@
+/********************************************
+ *  FILE        : Experiment 5
+ *  DESCRIPTION : Java program to display the engineer salary
+ *                and to display from Employee class using a 
+ *                single object instantiation 
+ *  AUTHOR      : Melissa Manoj Thondoli
+ *  VERSION     : 1
+ *  DATE        : 10/12/21
+ ********************************************/
+
+package lab21;
+import java.util.Scanner;
+class Employee{
+	public int basicSalary, DA, HRA;
+	public double grossSalary;
+	public void display() {
+		System.out.println("The Gross Salary of the Engineer is"+ grossSalary);
+	}
+	public double calcSalary() {
+		this.grossSalary=basicSalary+(DA*(double)(basicSalary/100)+(HRA*(double)(basicSalary/100)));
+		return grossSalary;
+	}
+}
+class Engineer extends Employee{
+	public void getSalaryDetails() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the Basic Salary of the Engineer: ");
+		this.basicSalary = sc.nextInt();
+		System.out.println("Enter the DA of the Engineer: ");
+		this.DA = sc.nextInt();
+		System.out.println("Enter the HRA of the Engineer: ");
+		this.HRA = sc.nextInt();
+		sc.close();
+	}
+	
+}
+public class Inheritance {
+	public static void main(String[] args) {
+		Engineer engineer = new Engineer();
+		engineer.getSalaryDetails();
+		engineer.calcSalary();
+		engineer.display();
+	}
+}
