@@ -1,0 +1,50 @@
+/***************************************
+ * FILE        : Experiment 12
+ * DESCRIPTION : Synchronization 
+ * AUTHOR      : Melissa Manoj Thondoli
+ * VERSION     : 1
+ * DATE        : 28/01/22
+ **********************************/
+
+package OOPJ;
+import java.util.Scanner;
+
+class MultiTable{
+	synchronized void printTable() {
+		System.out.println("Enter the Table you want to run by " + Thread.currentThread().getName());
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		for(int i=1;i<6;i++) {
+			System.out.println(n+"*"+i+"="+n*i);
+		}
+	}
+}
+
+class MultiThread extends Thread{
+	MultiTable t;
+	MultiThread(MultiTable t){
+		this.t = t;
+	}
+	public void run() {
+		t.printTable();
+	}
+}
+
+public class Experiment_12 {
+	
+	public static void main(String[] args) throws InterruptedException {
+		
+		MultiTable object = new MultiTable(); 
+		
+		MultiThread t1=new MultiThread(object); 
+		t1.setName("Thread 1");
+		MultiThread t2=new MultiThread(object); 
+		t2.setName("Thread 2");
+		MultiThread t3=new MultiThread(object);
+		t3.setName("Thread 3");
+		
+		t1.start();
+		t3.start();
+		t2.start();
+	}
+}
