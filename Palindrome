@@ -1,0 +1,46 @@
+/********************************************
+ *  FILE        : Experiment 1
+ *  DESCRIPTION : Java program that checks whether a given string 
+ *                is a palindrome or not.
+ *  AUTHOR      : Melissa Manoj Thondoli
+ *  VERSION     : 1
+ *  DATE        : 3/12/21
+ ********************************************/
+package lab21;
+import java.util.Scanner;
+
+class PalindromeCheck{
+	String string;
+	public boolean Palindrome(String string) {
+		int length=string.length();
+		boolean isPalindrome=true;
+		for(int i=0;i<length/2;i++) {
+			if(string.charAt(i)!=string.charAt(length-i-1)) {
+				isPalindrome=false;
+				break;
+			}
+		}
+		return isPalindrome;
+		
+	}
+}
+
+public class Palindrome {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the string to check whether palindrome: ");
+		String string =sc.next();
+		sc.close();
+		PalindromeCheck palindrome = new PalindromeCheck();
+		boolean result=palindrome.Palindrome(string);
+		if(result==true) {
+			System.out.println("The string is a palindrome");
+		}
+		else {
+			System.out.println("The string is not a palindrome");
+		}
+		
+	}
+
+}
