@@ -1,0 +1,83 @@
+import java.util.Scanner;
+
+class ReadMatrix{
+    int row;
+    int col;
+    int[][] matrix=new int[row][col];
+    public void readMatrix(int[][] matrix, int row, int col){
+        Scanner sc= new Scanner(System.in);
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                matrix[i][j]=sc.nextInt();
+            }
+        }
+    }
+}
+
+class PrintMatrix{
+    int row;
+    int col;
+    int[][] matrix=new int[row][col];
+    public void printMatrix(int[][] matrix, int row, int col){
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                System.out.print(matrix[i][j]+"  ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+class MultiplyMatrix{
+    int row1, col1;
+    int row2, col2;
+    int[][] matrix1=new int[row1][col1];
+    int[][] matrix2=new int[row2][col2];
+    int[][] productMatrix=new int[row1][col2];
+    public void multiplyMatrix(int[][] matrix1, int[][] matrix2, int[][] productMatrix, int row1, int col1,int row2, int col2){
+        for(int i=0;i<row1;i++){
+            for(int j=0;j<col2;j++){
+                productMatrix[i][j]=0;
+                for(int k=0;k<col1;k++){
+                    productMatrix[i][j]=productMatrix[i][j]+(matrix1[i][k]*matrix2[k][j]);
+                }
+            }
+        }
+    }
+}
+
+public class MatrixMultiplication{
+    public static void main(String[] args){
+        Scanner sp = new Scanner(System.in);
+        System.out.println("Enter the number of rows of matrix 1: ");
+        int row1=sp.nextInt();
+        System.out.println("Enter the number of columns of matrix 1: ");
+        int col1=sp.nextInt();
+        System.out.println("Enter the number of rows of matrix 2: ");
+        int row2=sp.nextInt();
+        System.out.println("Enter the number of columns of matrix 2: ");
+        int col2=sp.nextInt();
+        
+        int[][] matrix1=new int[row1][col1];
+        int[][] matrix2 = new int[row2][col2];
+        int[][] product=new int[row1][col2];
+
+        ReadMatrix read=new ReadMatrix();
+        System.out.println("Enter the elements of the first matrix:  ");
+        read.readMatrix(matrix1,row1,col1);
+        System.out.println("Enter the elements of the second matrix:  ");
+        read.readMatrix(matrix2,row2,col2);
+        if(col1==row2){
+            MultiplyMatrix multiply = new MultiplyMatrix();
+            multiply.multiplyMatrix(matrix1,matrix2,product,row1,col1,row2,col2);
+            PrintMatrix print = new PrintMatrix();
+            print.printMatrix(product,row1,col2);
+        }
+        else{
+            System.out.println("Multiplication not possible ! ");
+        }
+
+        sp.close();
+        
+    }
+}
