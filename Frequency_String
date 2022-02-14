@@ -1,0 +1,38 @@
+/********************************************
+ *  FILE        : Experiment 2
+ *  DESCRIPTION : Java Program to find the frequency 
+ *                of a given character in a string.
+ *  AUTHOR      : Melissa Manoj Thondoli
+ *  VERSION     : 1
+ *  DATE        : 3/12/21
+ ********************************************/
+package lab21;
+import java.util.Scanner;
+
+class Frequency{
+	String string;
+	char ch;
+	public void checkFrequency(String string,char ch) {
+		int count=0;
+		int length=string.length();
+		string=string.toLowerCase();
+		for(int i=0;i<length;i++) {
+			if(string.charAt(i)==ch) {
+				count++;
+			}
+		}
+		System.out.println("The frequency of "+ch+ " is "+count);
+	}
+}
+public class FrequencyString {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the string: ");
+		String string = sc.next();
+		System.out.println("Enter the character to find frequency: ");
+		char ch=sc.next().charAt(0);
+		Frequency frequency=new Frequency();
+		frequency.checkFrequency(string, ch);
+		sc.close();
+	}
+}
