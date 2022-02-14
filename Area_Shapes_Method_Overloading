@@ -1,0 +1,55 @@
+/********************************************
+ *  FILE        : Experiment 4
+ *  DESCRIPTION : Java program to calculate the area of different 
+                  shapes namely circle, rectangle, and triangle using
+                  the concept of method overloading.
+ *  AUTHOR      : Melissa Manoj Thondoli
+ *  VERSION     : 1
+ *  DATE        : 10/12/21
+ ********************************************/
+
+package lab21;
+import java.util.Scanner;
+class Shape{
+	float circleArea;
+	float rectangleArea;
+	double triangleArea;
+	
+	public void area(float radius) {
+		circleArea=3.14f*radius*radius;
+		System.out.println("The area of circle = " + circleArea);
+	}
+	public void area(float length, float width) {
+		rectangleArea=length*width;
+		System.out.println("The area of rectangle = " + rectangleArea);
+	}
+	public void area(double base, double height) {
+		triangleArea=0.5*base*height;
+		System.out.println("The area of triangle = " + triangleArea);
+	}
+	
+}
+
+public class MethodOverloading {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("The radius of circle = ");
+		float radius=sc.nextFloat();
+		System.out.println("The length of rectangle = ");
+		float length=sc.nextFloat();
+		System.out.println("The width of rectangle = ");
+		float width=sc.nextFloat();
+		System.out.println("The base length of triangle = ");
+		double base=sc.nextDouble();
+		System.out.println("The height of triangle = ");
+		double height=sc.nextDouble();
+		
+		Shape shape = new Shape();
+		shape.area(radius);
+		shape.area(length,width);
+		shape.area(base,height);
+		
+		sc.close();
+	}
+}
