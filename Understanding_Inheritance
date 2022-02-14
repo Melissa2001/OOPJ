@@ -1,0 +1,69 @@
+/********************************************
+ *  FILE        : Experiment 6
+ *  DESCRIPTION : Exercise to understand inheritance
+ *  AUTHOR      : Melissa Manoj Thondoli
+ *  VERSION     : 1
+ *  DATE        : 3/01/22
+ ********************************************/
+
+package lab21;
+
+class EmployeeDetails{
+	String name, address;
+	int age, phoneNumber, salary;
+	
+	EmployeeDetails(String name, String address, int age, int phoneNumber, int salary){
+		this.name=name;
+		this.address=address;
+		this.age=age;
+		this.phoneNumber=phoneNumber;
+		this.salary=salary;
+	}
+	void printDetails() {
+		System.out.println("Name = " + name);
+		System.out.println("Address = " + address);
+		System.out.println("Age = " + age);
+		System.out.println("Phone Number = " + phoneNumber);
+	}
+	
+	void printSalary() {
+		System.out.println("Salary = " + salary);
+	}
+}
+
+class Officer extends EmployeeDetails{
+	String specialization;
+	Officer(String name, String address, int age, int phoneNumber, int salary, String specialization) {
+		super(name,address,age,phoneNumber,salary);
+		this.specialization=specialization;
+	}
+	void specialization() {
+		System.out.println("specialization = " + specialization);
+	}
+	
+
+}
+class Manager extends EmployeeDetails{
+	String department;
+	Manager(String name, String address, int age, int phoneNumber, int salary, String department) {
+		super(name,address,age,phoneNumber,salary);
+		this.department = department;
+	}
+	
+	void department() {
+		System.out.println("Department = " + department);
+	}
+
+}
+public class EmployeeClass {
+	public static void main(String[] args) {
+		Officer officer = new Officer("Thomas","Pala",21,12345,50000,"AI");
+		System.out.println("OFFICER : ");
+		officer.printDetails();
+		officer.specialization();
+		Manager manager = new Manager("Peter","Kottayam",22,67890,70000,"CS");
+		System.out.println("MANAGER : ");
+		manager.printDetails();
+		manager.department();
+	}	
+}
