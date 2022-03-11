@@ -1,0 +1,118 @@
+package OOPJ;
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+public class LoginForm extends JFrame implements ActionListener{
+	
+	String s = "";
+	
+	JTextField username = new JTextField();
+	JTextField email = new JTextField();
+	
+	JPasswordField pass = new JPasswordField();
+	JPasswordField confirmPass = new JPasswordField();
+	
+	JButton login = new JButton("LOGIN");
+	JButton reset = new JButton("RESET");
+	
+	JLabel usernameL = new JLabel("USERNAME : ");
+	JLabel emailL = new JLabel("EMAIL : ");
+	JLabel passL = new JLabel("PASSWORD : ");
+	JLabel confirmPassL = new JLabel("CONFIRM PASSWORD : ");
+	
+	JLabel l=new JLabel("");
+	
+	LoginForm(){
+		
+		setTitle("LoginForm");
+		setVisible(true);
+		setLayout(null);
+		setSize(300,600);
+		
+		usernameL.setBounds(40,30,200,20);
+		add(usernameL);
+		username.setBounds(40,50,200,30);
+		add(username);
+		
+		emailL.setBounds(40,110,200,20);
+		add(emailL);
+		email.setBounds(40,130,200,30);
+		add(email);
+		
+		passL.setBounds(40,190,200,20);
+		add(passL);
+		pass.setBounds(40,210,200,30);
+		add(pass);
+		
+		confirmPassL.setBounds(40,270,200,20);
+		add(confirmPassL);
+		confirmPass.setBounds(40,290,200,30);
+		add(confirmPass);
+		
+		login.setBounds(100,350,80,30);
+		add(login);
+		reset.setBounds(100,400,80,30);
+		add(reset);
+		
+		l.setBounds(80,450,200,30);
+		add(l);
+		
+		login.addActionListener(this);
+		reset.addActionListener(this);
+		
+	}
+
+	
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource()==login) {
+			
+			if(username.getText().equals("admin")) {
+				
+				if(email.getText().equals("admin@sjcet.com")) {
+					
+					var pwdValue = pass.getPassword();
+					String password = new String(pwdValue);
+					
+					if(password.equals("admin123")) {
+						
+						var confpass=confirmPass.getPassword();
+						String confirmPassword = new String(confpass);
+						
+						if(confirmPassword.equals("admin123")) {
+							l.setText("Login Successfull !");	
+						}
+						
+						else {
+							l.setText("Recheck confirm password");
+						}
+					}
+					
+					else {
+						l.setText("Recheck password");
+					}
+					
+				}
+				else {
+					l.setText("Recheck email");
+				}
+			}
+			else {
+				l.setText("Recheck username");
+			}
+		}
+				
+		else {
+			username.setText(s);
+			email.setText(s);
+			pass.setText(s);
+			confirmPass.setText(s);
+		}		
+	}
+	
+	public static void main(String[] args) {
+		new LoginForm();
+	}
+}
